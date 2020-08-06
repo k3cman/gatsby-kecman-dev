@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-terminal",
+  "name": "kecmandev-blog",
   "private": true,
-  "description": "A Gatsby starter for gatsby-theme-terminal",
+  "description": "Nemanja Kecman MD blog",
   "version": "0.1.0",
-  "author": "Paul Scanlon <pauliescanlon@gmail.com>",
+  "author": "Nemanja Kecman",
   "dependencies": {
     "@mdx-js/mdx": "^1.5.7",
     "@mdx-js/react": "^1.5.7",
@@ -31,12 +31,5 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/PaulieScanlon/gatsby-starter-terminal"
-  },
-  "bugs": {
-    "url": "https://github.com/PaulieScanlon/gatsby-starter-terminal/issues"
   }
 }

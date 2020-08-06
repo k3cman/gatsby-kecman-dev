@@ -2,23 +2,173 @@
 navigationLabel: Home
 ---
 
-# Home
+import { format } from 'date-fns'
 
-This is `src/pages/index.mdx`
+## helloWorld
 
-Code snippets can themed, see `gatsby-plugin-theme-ui/index.js`
+Hi I'm Nemanja Kecman, Front-end developer,
+working full-time on Angular based web applications, and exploring Vue and React in my free time.
 
-```javascript
-<SourceList>
-  {source => (
-    <ul>
-      {source.map((edge, index) => {
+
+<Flex
+  sx={{ flexWrap: 'wrap' }}
+>
+
+  <Box 
+    sx={{
+      width: ['100%', '40%', '40%'],
+      mb: 3,
+      pr: [0, 0, 4]
+    }}
+  >
+
+  ## getStack
+
+  <Badge variant='primary' sx={{mr: 2}}> Angular </Badge>
+  <Badge variant='primary' sx={{mr: 2}}> RxJs </Badge>
+  <Badge variant='primary' sx={{mr: 2}}> Node.js </Badge>
+  <Badge variant='primary' sx={{mr: 2}}> Sass </Badge>
+  <Badge variant='primary' sx={{mr: 2}}> Redux </Badge>
+  <Badge variant='success' sx={{mr: 2}}> Nest.js </Badge>
+  <Badge variant='success' sx={{mr: 2}}> Express.js </Badge>
+  <Badge variant='success' sx={{mr: 2}}> React.js </Badge>
+  <Badge variant='success' sx={{mr: 2}}> React Native </Badge>
+  <Badge variant='success' sx={{mr: 2}}> Vue.js </Badge>
+
+
+  </Box>
+
+  <Box
+  sx={{
+      width: ['100%', '40%', '40%'],
+      mb: 3,
+    }}
+  >
+
+  ## contactMe
+  <Link href="https://github.com/k3cman">
+  <IconButton>
+  <Image src='images/github.png' />
+  </IconButton>
+  </Link>
+
+  <Link href="https://www.linkedin.com/in/k3cman/">
+  <IconButton>
+  <Image src='images/linked_in.png' />
+  </IconButton>
+  </Link>
+
+
+  <Link href="mailto:kecman.dev@gmail.com">
+  <IconButton>
+  <Image src='images/email.png' />
+  </IconButton>
+  </Link>
+
+  </Box>
+
+</Flex>
+
+## getPosts
+
+<SourceList filter="posts">
+  {posts => (
+    <Flex
+      sx={{
+        flexWrap: "wrap",
+        ml: theme => `-${theme.space[2]}px`,
+        mr: theme => `-${theme.space[2]}px`,
+      }}
+    >
+      {posts.filter((edge) => !edge.node.frontmatter.isPrivate)
+        .sort(
+          (a, b) =>
+            new Date(b.node.frontmatter.date) -
+            new Date(a.node.frontmatter.date)
+        )
+        .splice(0, 3)
+      .map((edge, index) => {
         const {
-          frontmatter: { title }
-        } = edge.node;
-        return <li key={index}>{title}</li>;
+          frontmatter: { title, date,featuredImage, url, misc },
+          fields: { slug },
+        } = edge.node
+        console.log(featuredImage)
+        return (
+          <Box
+            key={index}
+            sx={{ mb: 3, maxWidth: ["100%", "50%", "33.333%"], width: ["100%", "50%", "33.333%"] }}
+          >
+            <Link href={slug} sx={{textDecoration: 'none'}}>
+              <Card
+                sx={{
+                  ml: 2, 
+                  mr: 2,
+                }}
+              > 
+                <Image sx={{width:'100%'}} src={featuredImage.childImageSharp.fluid.src} />
+                <Box sx={{p:3}}>
+                <Text sx={{fontSize:0, color:'muted'}}>{format(new Date(date), 'd-MMM-u')}</Text>
+                <Heading variant="styles.h4" sx={{color: 'text'}}>{title}</Heading>
+                <Text sx={{textDecoration: 'underline'}}>View project /> </Text>
+                </Box>
+               
+              </Card>
+            </Link>
+          </Box>
+        )
       })}
-    </ul>
+    </Flex>
   )}
 </SourceList>
-```
+
+## getProjects
+
+<SourceList filter="projects">
+  {posts => (
+    <Flex
+      sx={{
+        flexWrap: "wrap",
+        ml: theme => `-${theme.space[2]}px`,
+        mr: theme => `-${theme.space[2]}px`,
+      }}
+    >
+      {posts.filter((edge) => !edge.node.frontmatter.isPrivate)
+        .sort(
+          (a, b) =>
+            new Date(b.node.frontmatter.date) -
+            new Date(a.node.frontmatter.date)
+        )
+        .splice(0, 3)
+      .map((edge, index) => {
+        const {
+          frontmatter: { title, date,featuredImage, url, misc },
+          fields: { slug },
+        } = edge.node
+        console.log(featuredImage)
+        return (
+          <Box
+            key={index}
+            sx={{ mb: 3, maxWidth: ["100%", "50%", "33.333%"], width: ["100%", "50%", "33.333%"] }}
+          >
+            <Link href={slug} sx={{textDecoration: 'none'}}>
+              <Card
+                sx={{
+                  ml: 2, 
+                  mr: 2,
+                }}
+              > 
+                <Image sx={{width:'100%'}} src={featuredImage.childImageSharp.fluid.src} />
+                <Box sx={{p:3}}>
+                <Text sx={{fontSize:0, color:'muted'}}>{format(new Date(date), 'd-MMM-u')}</Text>
+                <Heading variant="styles.h4" sx={{color: 'text'}}>{title}</Heading>
+                <Text sx={{textDecoration: 'underline'}}>View project /> </Text>
+                </Box>
+               
+              </Card>
+            </Link>
+          </Box>
+        )
+      })}
+    </Flex>
+  )}
+</SourceList>

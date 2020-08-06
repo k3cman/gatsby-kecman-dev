@@ -7,23 +7,23 @@ export default {
     ...baseTheme.colors,
     text: "#222222",
     muted: "#666666",
-    primary: "#FF4081",
-    secondary: "#03A9F4",
-    success: "#FFEB3B",
+    primary: "#FC4A1A",
+    secondary: "#000",
+    success: "#000",
     background: "#ffffff",
-    surface: "#f3f3f3"
+    surface: "#f3f3f3",
   },
   styles: {
     ...baseTheme.styles,
     p: {
       code: {
         ...baseTheme.styles.p.code,
-        color: "inherit"
-      }
+        color: "inherit",
+      },
     },
     pre: {
       ...baseTheme.styles.pre,
-      ...codeTheme
-    }
-  }
+      ...codeTheme,
+    },
+  },
 };
