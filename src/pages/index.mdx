@@ -6,9 +6,8 @@ import { format } from 'date-fns'
 
 ## helloWorld
 
-Hi I'm Nemanja Kecman, Front-end developer,
-working full-time on Angular based web applications, and exploring Vue and React in my free time.
-
+### Hi I'm Nemanja, Front-end developer. nice to meet you.
+Having worn many hats in my career between business developement, marketing management, 3D vizuelization, graphic design, I use my expirience to be more than just a coder.
 
 <Flex
   sx={{ flexWrap: 'wrap' }}
@@ -72,7 +71,9 @@ working full-time on Angular based web applications, and exploring Vue and React
 ## getPosts
 
 <SourceList filter="posts">
-  {posts => (
+  {posts => {
+    if(posts.length > 0){
+ return (
     <Flex
       sx={{
         flexWrap: "wrap",
@@ -105,7 +106,7 @@ working full-time on Angular based web applications, and exploring Vue and React
                   mr: 2,
                 }}
               > 
-                <Image sx={{width:'100%'}} src={featuredImage.childImageSharp.fluid.src} />
+                
                 <Box sx={{p:3}}>
                 <Text sx={{fontSize:0, color:'muted'}}>{format(new Date(date), 'd-MMM-u')}</Text>
                 <Heading variant="styles.h4" sx={{color: 'text'}}>{title}</Heading>
@@ -118,13 +119,22 @@ working full-time on Angular based web applications, and exploring Vue and React
         )
       })}
     </Flex>
-  )}
+  )
+    }else{
+      return (
+        <Text sx={{fontSize:0, color:'muted', marginBottom: 3}}>No posts found.</Text>
+      )
+    }
+   
+  }}
 </SourceList>
 
 ## getProjects
 
 <SourceList filter="projects">
-  {posts => (
+  {posts => {
+    if(posts.length > 0){
+      return (
     <Flex
       sx={{
         flexWrap: "wrap",
@@ -157,7 +167,7 @@ working full-time on Angular based web applications, and exploring Vue and React
                   mr: 2,
                 }}
               > 
-                <Image sx={{width:'100%'}} src={featuredImage.childImageSharp.fluid.src} />
+                
                 <Box sx={{p:3}}>
                 <Text sx={{fontSize:0, color:'muted'}}>{format(new Date(date), 'd-MMM-u')}</Text>
                 <Heading variant="styles.h4" sx={{color: 'text'}}>{title}</Heading>
@@ -170,5 +180,13 @@ working full-time on Angular based web applications, and exploring Vue and React
         )
       })}
     </Flex>
-  )}
+  )
+    }else{
+      return (
+        <Text sx={{fontSize:0, color:'muted', marginBottom: 3}}>No projects found.</Text>
+      )
+    }
+  }
+  
+  }
 </SourceList>
