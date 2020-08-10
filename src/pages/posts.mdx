@@ -4,24 +4,63 @@ navigationLabel: Posts
 
 # Posts
 
-This is `src/pages/posts.mdx`
 
-Here we use the `<SourceList />` to list files found in `posts`
 
-<SourceList>
-  {source => (
-    <ul>
-      {source.map((edge, index) => {
+<SourceList filter="posts">
+  {posts => {
+    if(posts.length > 0){
+ return (
+    <Flex
+      sx={{
+        flexWrap: "wrap",
+        ml: theme => `-${theme.space[2]}px`,
+        mr: theme => `-${theme.space[2]}px`,
+      }}
+    >
+      {posts.filter((edge) => !edge.node.frontmatter.isPrivate)
+        .sort(
+          (a, b) =>
+            new Date(b.node.frontmatter.date) -
+            new Date(a.node.frontmatter.date)
+        )
+        .splice(0, 3)
+      .map((edge, index) => {
         const {
-          frontmatter: { title },
-          fields: { slug }
-        } = edge.node;
+          frontmatter: { title, date,featuredImage, url, misc },
+          fields: { slug },
+        } = edge.node
+        console.log(featuredImage)
         return (
-          <li key={index}>
-            <a href={slug}>{title}</a>
-          </li>
-        );
+          <Box
+            key={index}
+            sx={{ mb: 3, maxWidth: ["100%", "50%", "33.333%"], width: ["100%", "50%", "33.333%"] }}
+          >
+            <Link href={slug} sx={{textDecoration: 'none'}}>
+              <Card
+                sx={{
+                  ml: 2, 
+                  mr: 2,
+                }}
+              > 
+                
+                <Box sx={{p:3}}>
+                <Text sx={{fontSize:0, color:'muted'}}>{format(new Date(date), 'd-MMM-u')}</Text>
+                <Heading variant="styles.h4" sx={{color: 'text'}}>{title}</Heading>
+                <Text sx={{textDecoration: 'underline'}}>View project /> </Text>
+                </Box>
+               
+              </Card>
+            </Link>
+          </Box>
+        )
       })}
-    </ul>
-  )}
+    </Flex>
+  )
+    }else{
+      return (
+        <Text sx={{fontSize:0, color:'muted', marginBottom: 3}}>No posts found.</Text>
+      )
+    }
+   
+  }}
 </SourceList>
